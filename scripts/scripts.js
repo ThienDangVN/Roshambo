@@ -1,4 +1,6 @@
 
+let humanScore = 0;
+let computerScore = 0;
 
 // create getComputerChoice function name
 // function returns the computer's selection with the use of Math.random
@@ -6,7 +8,7 @@
 function getComputerChoice(){
     let randomGen = Math.floor(Math.random()*30);
     let compChoice;
-    //console.log(randomGen);
+
     if (randomGen > 10 & randomGen <= 20){
         compChoice = "Rock";
 
@@ -34,18 +36,17 @@ function getHumanChoice(){
     while (i == 0) {
         // this checks for user's ESC or closing the prompt
         if (usersInput === null) {
-            //console.log("user canceled the prompt")
             return null;
         }
         // looks for rock, paper, scissors strings only. Will continue to prompt user until the strings are recognized or prompt cancelled.
         if (usersInput.toLowerCase() === "rock" || usersInput.toLowerCase() === "paper" || usersInput.toLowerCase() === "scissors") {
-            // i = 1;
             return usersInput.toLowerCase();
 
         } else {
-            usersInput = prompt("Please Enter \"Rock\", \"Paper\" Or \"Scissors\" Only");
+            usersInput = prompt(`Please Enter \"Rock\", \"Paper\" Or \"Scissors\" Only\nUser Score: ${humanScore}\nComp Score: ${computerScore}`);
 
         }
+
     } 
 }
 
@@ -55,8 +56,7 @@ function getHumanChoice(){
 // playRound Function has two arguments: humanChoice and computerChoice.
 // IF comp selection is greater than user's write to console "You lose! Paper Beats Rock" ELSE you win
 
-let humanScore = 0;
-let computerScore = 0;
+
 
 function playRound(humanChoice, computerChoice) {
 
@@ -64,7 +64,7 @@ function playRound(humanChoice, computerChoice) {
     switch(humanChoice) {
         // null case is used for catching prompt cancellation.
         case null:
-            console.log("No User Selection")
+            console.log("No User Selection");
             humanScore = null;
             break;
         
@@ -74,9 +74,9 @@ function playRound(humanChoice, computerChoice) {
                 console.log("You Win! Rock Beats Scissors");
             } else if (computerChoice === "Paper") {
                 computerScore ++;
-                console.log("You Lose! Paper Beats Rock")
+                console.log("You Lose! Paper Beats Rock");
             } else {
-                console.log("Draw!")
+                console.log("Draw!");
             }
             break;
         
@@ -86,9 +86,9 @@ function playRound(humanChoice, computerChoice) {
                 console.log("You Win! paper Beats Rock");
             } else if (computerChoice === "scissors") {
                 computerScore ++;
-                console.log("You Lose! Scissors Beats Paper")
+                console.log("You Lose! Scissors Beats Paper");
             } else {
-                console.log("Draw!")
+                console.log("Draw!");
             }
             break;
         
@@ -98,9 +98,9 @@ function playRound(humanChoice, computerChoice) {
                 console.log("You Win! Scissors Beat Paper");
             } else if (computerChoice === "Rock") {
                 computerScore ++;
-                console.log("You Lose! Rock Beats Scissors")
+                console.log("You Lose! Rock Beats Scissors");
             } else {
-                console.log("Draw!")
+                console.log("Draw!");
             }
             break;
     }
@@ -118,7 +118,6 @@ function playGame() {
 
         playRound(getHumanChoice(), getComputerChoice())
         if (humanScore === null) {
-            // roundNumber = 5;
             break;
         }
         roundNumber++;
@@ -129,8 +128,17 @@ function playGame() {
 
 playGame();
 
-if (humanScore > computerScore & humanScore !== null) {
-    console.log("Congraduations! You Won!")
+// displays final results based on final scores. 
+// Ca
+if (humanScore === null) {
+    alert("The User Cancelled the Prompt")
+
+} else if (computerScore > humanScore) {
+    alert(`You Lose, Game Over!\nUser Score: ${humanScore}\nComp Score: ${computerScore}`);
+
+} else if (humanScore > computerScore & humanScore !== null) {
+    alert(`Congraduations! You Won!\nUser Score: ${humanScore}\nComp Score: ${computerScore}`);
+
 } else {
-    console.log("You Lose, Game Over")
+    alert(`Draw!\nUser Score: ${humanScore}\nComp Score: ${computerScore}`);
 }
